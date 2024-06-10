@@ -1,6 +1,5 @@
-using StyleShare_API.Users.Domain.Model.ValueObjects;
-using StyleShare.Platform.API.PersonaUsers.Domain.Model.Commands;
 using StyleShare.Platform.API.PersonaUsers.Domain.Model.ValueObjects;
+using StyleShare.Platform.API.PersonaUsers.Domain.Model.Commands;
 
 namespace StyleShare.Platform.API.PersonaUsers.Domain.Model.Aggregates;
 
