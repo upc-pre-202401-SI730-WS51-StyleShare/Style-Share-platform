@@ -1,6 +1,7 @@
 using StyleShare.Platform.API.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
+using StyleShare.Platform.API.PersonaUsers.Domain.Model.Aggregates;
 
 namespace StyleShare.Platform.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 
@@ -23,6 +24,10 @@ public class AppDBContext(DbContextOptions options) : DbContext(options)
         //builder.Entity<Tutorial>().Property(c => c.Title).IsRequired().HasMaxLength(60);
         //builder.Entity<Tutorial>().Property(c => c.Summary).IsRequired().HasMaxLength(100);
         // End BoundedContext Model
+
+        builder.Entity<Users>().HasKey(u => u.Id);
+        builder.Entity<Users>().Property(u => u.FullName).IsRequired();
+        builder.Entity<Users>().Property(u => u.FullNumber).IsRequired();
         
         builder.UseSnakeCaseWithPluralizedTableNamingConvention();
     }
