@@ -32,8 +32,7 @@ public class TransactionHistoryController(ITransactionHistoryQueryService transa
         var resources = transactionHistory.Select(TransactionHistoryResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(resources);
     }
-
-    //Quizas falle
+    
     [HttpPost]
     public async Task<IActionResult> CreateTransactionHistory(
         [FromBody] CreateTransactionHistoryResource createTransactionHistoryResource)
@@ -44,10 +43,9 @@ public class TransactionHistoryController(ITransactionHistoryQueryService transa
         var transactionHistory = await transactionHistoryCommandService.Handle(createtransactionHistoryCommand);
         if (transactionHistory is null) return BadRequest();
         var resource = TransactionHistoryResourceFromEntityAssembler.ToResourceFromEntity(transactionHistory);
-        return CreatedAtAction("nameof()", new { transactionHistoryId = resource.Id }, resource);
+        return CreatedAtAction(nameof(GetTransactionHistoryById), new { transactionHistoryId = resource.Id }, resource);
     }
-
-    //Quizas falle
+    
     [HttpPost("{transactionHistoryId}/Transaction")]
     public async Task<IActionResult> AddTransactionToTransactionHistory(
         [FromBody] AddTransactionToTransactionHistoryResource addTransactionToTransactionHistoryResource,
@@ -59,6 +57,6 @@ public class TransactionHistoryController(ITransactionHistoryQueryService transa
         var transactionHistory =
             await transactionHistoryCommandService.Handle(addTransactionToTransactionHistoryCommand);
         var resource = TransactionHistoryResourceFromEntityAssembler.ToResourceFromEntity(transactionHistory);
-        return CreatedAtAction("nameof()", new { transactionHistoryId = resource.Id }, resource);
+        return CreatedAtAction(nameof(GetTransactionHistoryById), new { transactionHistoryId = resource.Id }, resource);
     }
 }

@@ -10,6 +10,7 @@ public partial class Transaction
     public int Amount {get; private set;}
     public EPaymentMethod PaymentMethod {get; private set;}
     public List<int> RentIds {get; private set;}
+    public List<RentId> RentIdsReference {get; private set;}
     
     public Transaction()
     {
@@ -36,5 +37,6 @@ public partial class Transaction
     public void addRent(int rentId)
     {
         RentIds.Add(rentId);
+        RentIdsReference.Add(new RentId(rentId));
     }
 }
