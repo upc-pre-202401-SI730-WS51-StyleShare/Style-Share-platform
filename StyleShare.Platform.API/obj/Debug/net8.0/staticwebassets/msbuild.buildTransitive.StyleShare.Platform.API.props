@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\StyleShare.Platform.API.props" />
-</Project>
