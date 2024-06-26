@@ -16,4 +16,9 @@ public class CommentQueryService(ICommentRepository commentRepository) : ICommen
     {
         return await commentRepository.FindByPublicationIdAsync(query.publicationId);
     }
+
+    public async Task<IEnumerable<Comment>> Handle(GetAllCommentsQuery query)
+    {
+        return await commentRepository.ListAsync();
+    }
 }

@@ -3,6 +3,7 @@ using StyleShare.Platform.API.Publications.Domain.Model.Queries;
 using StyleShare.Platform.API.Publications.Domain.Services;
 using StyleShare.Platform.API.Publications.Interfaces.REST.Resources;
 using StyleShare.Platform.API.Publications.Interfaces.REST.Transform;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace StyleShare.Platform.API.Publications.Interfaces.REST;
 
@@ -11,6 +12,8 @@ namespace StyleShare.Platform.API.Publications.Interfaces.REST;
 public class PublicationsController(IPublicationCommandService publicationCommandService,
     IPublicationQueryService publicationQueryService) : ControllerBase
 {
+
+    [SwaggerOperation(Summary = "Get publication by id")]
     [HttpGet("{publicationId}")]
     public async Task<IActionResult> GetPublicationById([FromRoute] int publicationId)
     {
@@ -20,6 +23,7 @@ public class PublicationsController(IPublicationCommandService publicationComman
         return Ok(resource);
     }
 
+    [SwaggerOperation(Summary = "Get all publications")]
     [HttpGet]
     public async Task<IActionResult> GetAllPublications()
     {
@@ -29,6 +33,7 @@ public class PublicationsController(IPublicationCommandService publicationComman
         return Ok(resources);
     }
 
+    [SwaggerOperation(Summary = "Create publication")]
     [HttpPost]
     public async Task<IActionResult> CreatePublication([FromBody] CreatePublicationResource createPublicationResource)
     {
@@ -37,9 +42,10 @@ public class PublicationsController(IPublicationCommandService publicationComman
         var publication = await publicationCommandService.Handle(createPublicationCommand);
         if (publication is null) return BadRequest();
         var resource = PublicationResourceFromEntityAssembler.ToResourceFromEntity(publication);
-        return CreatedAtAction(nameof(GetPublicationById), new {publication = resource.Id}, resource);
+        return CreatedAtAction(nameof(GetPublicationById), new {publicationId = resource.Id}, resource);
     }
     
+    [SwaggerOperation(Summary = "Update publication")]
     [HttpPut("{publicationId}")]
     public async Task<IActionResult> UpdatePublication(
         [FromBody] UpdatePublicationResource updatePublicationResource, [FromRoute] int publicationId)
@@ -48,9 +54,10 @@ public class PublicationsController(IPublicationCommandService publicationComman
             .ToCommandFromResource(updatePublicationResource, publicationId);
         var publication = await publicationCommandService.Handle(updatePublicationCommand);
         var resource = PublicationResourceFromEntityAssembler.ToResourceFromEntity(publication);
-        return CreatedAtAction(nameof(GetPublicationById), new{publicationIdentifier = resource.Id}, resource);
+        return CreatedAtAction(nameof(GetPublicationById), new {publicationId = resource.Id}, resource);
     }
 
+    [SwaggerOperation(Summary = "Add comment to publication")]
     [HttpPut("{publicationId}/comments")]
     public async Task<IActionResult> AddCommentToPublication(
         [FromBody] AddCommentToPublicationResource addCommentToPublicationResource, [FromRoute] int publicationId)
@@ -60,7 +67,7 @@ public class PublicationsController(IPublicationCommandService publicationComman
                 publicationId);
         var publication = await publicationCommandService.Handle(addCommentToPublicationCommand);
         var resource = PublicationResourceFromEntityAssembler.ToResourceFromEntity(publication);
-        return CreatedAtAction(nameof(GetPublicationById), new { publicationIdentifier = resource.Id }, resource);
+        return CreatedAtAction(nameof(GetPublicationById), new { publicationId = resource.Id }, resource);
     }
     
 }

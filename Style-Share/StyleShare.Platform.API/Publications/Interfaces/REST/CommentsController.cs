@@ -3,6 +3,7 @@ using StyleShare.Platform.API.Publications.Domain.Model.Queries;
 using StyleShare.Platform.API.Publications.Domain.Services;
 using StyleShare.Platform.API.Publications.Interfaces.REST.Resources;
 using StyleShare.Platform.API.Publications.Interfaces.REST.Transform;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace StyleShare.Platform.API.Publications.Interfaces.REST;
 
@@ -12,6 +13,7 @@ public class CommentsController(ICommentCommandService commentCommandService,
     ICommentQueryService commentQueryService) : ControllerBase
 {
 
+    [SwaggerOperation(Summary = "Get comment by id")]
     [HttpGet("{commentId}")]
     public async Task<IActionResult> GetCommentById([FromRoute] int commentId)
     {
@@ -20,7 +22,18 @@ public class CommentsController(ICommentCommandService commentCommandService,
         var resource = CommentResourceFromEntityAssembler.ToResourceFromEntity(comment);
         return Ok(resource);
     }
+
+    [SwaggerOperation(Summary = "Get all comments")]
+    [HttpGet]
+    public async Task<IActionResult> GetAllComments()
+    {
+        var getAllComments = new GetAllCommentsQuery();
+        var comments = await commentQueryService.Handle(getAllComments);
+        var resources = comments.Select(CommentResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(resources);
+    }
     
+    [SwaggerOperation(Summary = "Create comment")]
     [HttpPost]
     public async Task<IActionResult> CreateComment([FromBody] CreateCommentResource createCommentResource)
     {
@@ -30,9 +43,10 @@ public class CommentsController(ICommentCommandService commentCommandService,
         var comment = await commentCommandService.Handle(createCommentCommand);
         if (comment is null) return BadRequest();
         var resource = CommentResourceFromEntityAssembler.ToResourceFromEntity(comment);
-        return CreatedAtAction(nameof(GetCommentById), new { comment = resource.Id }, resource);
+        return CreatedAtAction(nameof(GetCommentById), new { commentId = resource.Id }, resource);
     }
 
+    [SwaggerOperation(Summary = "Update comment")]
     [HttpPut("{commentId}")]
     public async Task<IActionResult> UpdateComment(
         [FromBody] UpdateCommentResource updateCommentResource, [FromRoute] int commentId)
@@ -41,6 +55,6 @@ public class CommentsController(ICommentCommandService commentCommandService,
             .ToCommandFromResource(updateCommentResource, commentId);
         var comment = await commentCommandService.Handle(updateCommentCommand);
         var resource = CommentResourceFromEntityAssembler.ToResourceFromEntity(comment);
-        return CreatedAtAction(nameof(GetCommentById), new{commentIdentifier = resource.Id}, resource);
+        return CreatedAtAction(nameof(GetCommentById), new{commentId = resource.Id}, resource);
     }
 }

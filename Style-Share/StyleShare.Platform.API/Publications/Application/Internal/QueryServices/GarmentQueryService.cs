@@ -11,4 +11,9 @@ public class GarmentQueryService(IGarmentRepository garmentRepository): IGarment
     {
         return await garmentRepository.FindByIdAsync(query.garmentId);
     }
+
+    public async Task<IEnumerable<Garment>> Handle(GetAllGarmentsQuery query)
+    {
+        return await garmentRepository.ListAsync();
+    }
 }
