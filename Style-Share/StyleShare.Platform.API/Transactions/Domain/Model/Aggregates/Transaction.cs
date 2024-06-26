@@ -18,6 +18,7 @@ public partial class Transaction
         Amount = 0;
         PaymentMethod = EPaymentMethod.None;
         RentIds = new List<int>();
+        RentIdsReference = new List<RentId>();
     }
     
     public Transaction(string details, int amount, EPaymentMethod paymentMethod) : this()
@@ -25,6 +26,8 @@ public partial class Transaction
         Details = details;
         Amount = amount;
         PaymentMethod = paymentMethod;
+        RentIds = new List<int>();
+        RentIdsReference = new List<RentId>();
     }
 
     public Transaction(CreateTransactionCommand command)
@@ -32,6 +35,8 @@ public partial class Transaction
         Details = command.details;
         Amount = command.amount;
         PaymentMethod = command.paymentMethod;
+        RentIds = new List<int>();
+        RentIdsReference = new List<RentId>();
     }
 
     public void addRent(int rentId)

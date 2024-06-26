@@ -7,6 +7,11 @@ namespace StyleShare.Platform.API.Transactions.Application.Internal.QueryService
 
 public class TransactionQueryService(ITransactionRepository transactionRepository): ITransactionQueryService
 {
+    public async Task<IEnumerable<Transaction>> Handle(GetAllTransactionsQuery query)
+    {
+        return await transactionRepository.ListAsync();
+    }
+
     public async Task<Transaction?> Handle(GetTransactionByIdQuery query)
     {
         return await transactionRepository.FindByIdAsync(query.transactionId);

@@ -5,6 +5,7 @@ using StyleShare.Platform.API.Transactions.Domain.Model.Queries;
 using StyleShare.Platform.API.Transactions.Domain.Services;
 using StyleShare.Platform.API.Transactions.Interfaces.REST.Resources;
 using StyleShare.Platform.API.Transactions.Interfaces.REST.Transform;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace StyleShare.Platform.API.Transactions.Interfaces.REST;
 
@@ -15,6 +16,7 @@ namespace StyleShare.Platform.API.Transactions.Interfaces.REST;
 public class TransactionController(ITransactionQueryService transactionQueryService, ITransactionCommandService transactionCommandService):
     ControllerBase
 {
+    [SwaggerOperation(Summary = "Get transaction by id")]
     [HttpGet("{transactionId}")]
     public async Task<IActionResult> GetTransactionId(int transactionId)
     {
@@ -24,6 +26,17 @@ public class TransactionController(ITransactionQueryService transactionQueryServ
         return Ok(resource);
     }
 
+    [SwaggerOperation(Summary = "Get all transactions")]
+    [HttpGet]
+    public async Task<IActionResult> GetAllTransaction()
+    {
+        var query = new GetAllTransactionsQuery();
+        var transactions = await transactionQueryService.Handle(query);
+        var resources = transactions.Select(TransactionResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(resources);
+    }
+
+    [SwaggerOperation(Summary = "Create transaction")]
     [HttpPost]
     public async Task<IActionResult> CreateTransaction([FromBody] CreateTransactionResource createTransactionResource)
     {
@@ -36,7 +49,8 @@ public class TransactionController(ITransactionQueryService transactionQueryServ
         return CreatedAtAction(nameof(GetTransactionId), new {transactionId = resource.Id }, resource);
     }
 
-    [HttpPost("{transactionId}/Rent")]
+    [SwaggerOperation(Summary = "Add rent to transaction")]
+    [HttpPut("{transactionId}/Rent")]
     public async Task<IActionResult> AddRentToTransaction( [FromBody] AddRentToTransactionResource addRentToTransactionResource,
         [FromRoute] int transactionId)
     {

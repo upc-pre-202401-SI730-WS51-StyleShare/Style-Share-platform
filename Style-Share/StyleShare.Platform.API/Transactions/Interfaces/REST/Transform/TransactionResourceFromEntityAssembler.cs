@@ -11,6 +11,7 @@ public class TransactionResourceFromEntityAssembler
             transaction.Id,
             transaction.Details,
             transaction.Amount,
-            transaction.PaymentMethod);
+            transaction.PaymentMethod,
+            transaction.RentIds);
     }
 }

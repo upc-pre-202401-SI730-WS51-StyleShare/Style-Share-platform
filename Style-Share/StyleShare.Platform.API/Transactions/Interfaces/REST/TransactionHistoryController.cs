@@ -5,6 +5,7 @@ using StyleShare.Platform.API.Transactions.Domain.Model.Queries;
 using StyleShare.Platform.API.Transactions.Domain.Services;
 using StyleShare.Platform.API.Transactions.Interfaces.REST.Resources;
 using StyleShare.Platform.API.Transactions.Interfaces.REST.Transform;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace StyleShare.Platform.API.Transactions.Interfaces.REST;
 
@@ -14,6 +15,7 @@ namespace StyleShare.Platform.API.Transactions.Interfaces.REST;
 public class TransactionHistoryController(ITransactionHistoryQueryService transactionHistoryQueryService,
     ITransactionHistoryCommandService transactionHistoryCommandService): ControllerBase
 {
+    [SwaggerOperation(Summary = "Get transaction history by id")]
     [HttpGet("{transactionHistoryId}")]
     public async Task<IActionResult> GetTransactionHistoryById([FromRoute] int transactionHistoryId)
     {
@@ -24,6 +26,7 @@ public class TransactionHistoryController(ITransactionHistoryQueryService transa
         return Ok(resource);
     }
 
+    [SwaggerOperation(Summary = "Get all transaction histories")]
     [HttpGet]
     public async Task<IActionResult> GetAllTransactionHistory()
     {
@@ -33,6 +36,7 @@ public class TransactionHistoryController(ITransactionHistoryQueryService transa
         return Ok(resources);
     }
     
+    [SwaggerOperation(Summary = "Crate transaction history")]
     [HttpPost]
     public async Task<IActionResult> CreateTransactionHistory(
         [FromBody] CreateTransactionHistoryResource createTransactionHistoryResource)
@@ -46,7 +50,8 @@ public class TransactionHistoryController(ITransactionHistoryQueryService transa
         return CreatedAtAction(nameof(GetTransactionHistoryById), new { transactionHistoryId = resource.Id }, resource);
     }
     
-    [HttpPost("{transactionHistoryId}/Transaction")]
+    [SwaggerOperation(Summary = "Add transaction to transaction history")]
+    [HttpPut("{transactionHistoryId}/Transaction")]
     public async Task<IActionResult> AddTransactionToTransactionHistory(
         [FromBody] AddTransactionToTransactionHistoryResource addTransactionToTransactionHistoryResource,
         [FromRoute] int transactionHistoryId)

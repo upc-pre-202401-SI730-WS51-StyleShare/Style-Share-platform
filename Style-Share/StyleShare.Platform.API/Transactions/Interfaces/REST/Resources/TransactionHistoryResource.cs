@@ -1,3 +1,3 @@
 ﻿namespace StyleShare.Platform.API.Transactions.Interfaces.REST.Resources;
 
-public record TransactionHistoryResource(int Id, int transactionId);
+public record TransactionHistoryResource(int Id, List<int> TransactionIds);

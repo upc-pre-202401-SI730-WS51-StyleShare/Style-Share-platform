@@ -7,6 +7,6 @@ public class TransactionHistoryResourceFromEntityAssembler
 {
     public static TransactionHistoryResource ToResourceFromEntity(TransactionHistory transactionHistory)
     {
-        return new TransactionHistoryResource(transactionHistory.Id, transactionHistory.TransactionIds.First());
+        return new TransactionHistoryResource(transactionHistory.Id, transactionHistory.TransactionIds);
     }
 }

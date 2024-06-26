@@ -6,7 +6,8 @@ using StyleShare.Platform.API.Transactions.Domain.Services;
 
 namespace StyleShare.Platform.API.Transactions.Application.Internal.CommandServices;
 
-public class TransactionHistoryCommandService(ITransactionHistoryRepository transactionHistoryRepository, IUnitOfWork unitOfWork):
+public class TransactionHistoryCommandService(ITransactionHistoryRepository transactionHistoryRepository,
+    ITransactionRepository transactionRepository,IUnitOfWork unitOfWork):
     ITransactionHistoryCommandService
 {
     public async Task<TransactionHistory> Handle(CreateTransactionHistoryCommand command)
@@ -21,7 +22,11 @@ public class TransactionHistoryCommandService(ITransactionHistoryRepository tran
     {
         var transactionHistory = await transactionHistoryRepository.FindByIdAsync(command.TransactionHistoryId);
         if(transactionHistory is null) throw new Exception("Transaction history not found");
-        transactionHistory.addTransaction(command.TransactionID);
+
+        var transaction = await transactionRepository.FindByIdAsync(command.TransactionId);
+        if(transaction is null) throw new Exception("Transaction not found");
+        
+        transactionHistory.addTransaction(command.TransactionId);
         await unitOfWork.CompleteAsync();
         return transactionHistory;
     }
