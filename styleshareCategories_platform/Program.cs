@@ -42,13 +42,14 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 //CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost",
+    options.AddPolicy("AllowStyleshareFrontend",
         builder =>
         {
             builder
-                .WithOrigins("http://localhost:5010", "https://styleshare-frontend2-a9ab5.web.app")
+                .WithOrigins("https://styleshare-frontend3.web.app")
                 .AllowAnyMethod()
-                .AllowAnyHeader();
+                .AllowAnyHeader()
+                .AllowCredentials(); // Permitir credenciales si es necesario
         });
 });
 // Configure Database Context and Logging Levels
@@ -130,7 +131,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 
-app.UseCors("AllowLocalhost");
+app.UseCors("AllowStyleshareFrontend"); 
 
 app.UseHttpsRedirection();
 
