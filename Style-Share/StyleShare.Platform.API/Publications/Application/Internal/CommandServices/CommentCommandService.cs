@@ -6,13 +6,19 @@ using StyleShare.Platform.API.Shared.Domain.Repositories;
 
 namespace StyleShare.Platform.API.Publications.Application.Internal.CommandServices;
 
-public class CommentCommandService(ICommentRepository commentRepository, IUnitOfWork unitOfWork)
+public class CommentCommandService(ICommentRepository commentRepository, IPublicationRepository publicationRepository, IUnitOfWork unitOfWork)
                                     :ICommentCommandService
 {
     public async Task<Comment?> Handle(CreateCommentCommand command)
     {
         var comment = new Comment(command.title, command.punctuation, command.description, command.publicationId);
-
+        var publication = await publicationRepository.FindByIdAsync(command.publicationId);
+            
+        if (publication is null)
+        {
+            throw new Exception("Publication does not exist");
+        }
+        
         try
         {
             await commentRepository.AddAsync(comment);
