@@ -1,5 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using StyleShare.Platform.API.Publications.Application.Internal.CommandServices;
+using StyleShare.Platform.API.Publications.Application.Internal.QueryServices;
+using StyleShare.Platform.API.Publications.Domain.Repositories;
+using StyleShare.Platform.API.Publications.Domain.Services;
+using StyleShare.Platform.API.Publications.Infrastructure.Persistence.EFC.Repositories;
 using StyleShare.Platform.API.Rent.Application.Internal.CommandServices;
 using StyleShare.Platform.API.Rent.Application.Internal.QueryServices;
 using StyleShare.Platform.API.Rent.Domain.Repositories;
@@ -97,6 +102,17 @@ builder.Services.AddScoped<ICartQueryService, CartQueryService>();
 builder.Services.AddScoped<IProductCartRepository, ProductCartRepository>();
 builder.Services.AddScoped<IProductCartCommandService, ProductCartCommandServices>();
 builder.Services.AddScoped<IProductCartQueryService, ProductCartQueryService>();
+
+//Publishing Bounded Context Injection Configuration
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<ICommentCommandService, CommentCommandService>();
+builder.Services.AddScoped<ICommentQueryService, CommentQueryService>();
+builder.Services.AddScoped<IGarmentRepository, GarmentRepository>();
+builder.Services.AddScoped<IGarmentCommandService, GarmentCommandService>();
+builder.Services.AddScoped<IGarmentQueryService, GarmentQueryService>();
+builder.Services.AddScoped<IPublicationRepository, PublicationRepository>();
+builder.Services.AddScoped<IPublicationCommandService, PublicationCommandService>();
+builder.Services.AddScoped<IPublicationQueryService, PublicationQueryService>();
 
 var app = builder.Build();
 // Use CORS policy
