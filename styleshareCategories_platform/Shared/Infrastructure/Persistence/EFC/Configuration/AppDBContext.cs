@@ -37,7 +37,7 @@ public class AppDBContext(DbContextOptions options) : DbContext(options)
         modelBuilder.Entity<Category>()
             .Property(c => c.Image2)
             .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(300);
         modelBuilder.Entity<Category>()
             .Property(c => c.Description)
             .IsRequired()
