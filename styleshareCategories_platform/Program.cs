@@ -45,10 +45,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowLocalhost",
         builder =>
         {
-            builder.WithOrigins("https://styleshare-frontend-20464.web.app") // Configura el origen del frontend Vue.js
+            builder
+                .WithOrigins("http://localhost:5010", "https://styleshare-frontend2-a9ab5.web.app")
                 .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials();
+                .AllowAnyHeader();
         });
 });
 // Configure Database Context and Logging Levels

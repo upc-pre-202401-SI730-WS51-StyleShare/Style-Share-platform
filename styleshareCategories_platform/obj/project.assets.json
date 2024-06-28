@@ -7510,31 +7510,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\TONY\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Fatima\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\TONY\\Downloads\\TFAPLIC\\styleshareCategories_platform\\styleshareCategories_platform\\styleshareCategories_platform.csproj",
+      "projectUniqueName": "C:\\Users\\Fatima\\Desktop\\UPC\\Ciclo 2024 I\\AplicWb\\Final2\\Style-Share-platform-feature-categories\\styleshareCategories_platform\\styleshareCategories_platform.csproj",
       "projectName": "styleshareCategories_platform",
-      "projectPath": "C:\\Users\\TONY\\Downloads\\TFAPLIC\\styleshareCategories_platform\\styleshareCategories_platform\\styleshareCategories_platform.csproj",
-      "packagesPath": "C:\\Users\\TONY\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\TONY\\Downloads\\TFAPLIC\\styleshareCategories_platform\\styleshareCategories_platform\\obj\\",
+      "projectPath": "C:\\Users\\Fatima\\Desktop\\UPC\\Ciclo 2024 I\\AplicWb\\Final2\\Style-Share-platform-feature-categories\\styleshareCategories_platform\\styleshareCategories_platform.csproj",
+      "packagesPath": "C:\\Users\\Fatima\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Fatima\\Desktop\\UPC\\Ciclo 2024 I\\AplicWb\\Final2\\Style-Share-platform-feature-categories\\styleshareCategories_platform\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\TONY\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Fatima\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -7641,7 +7634,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\TONY\\.dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\Fatima\\.dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
