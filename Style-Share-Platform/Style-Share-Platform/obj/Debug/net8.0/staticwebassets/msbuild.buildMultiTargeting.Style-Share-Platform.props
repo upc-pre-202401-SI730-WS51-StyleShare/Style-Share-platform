@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Style-Share-Platform.props" />
+</Project>

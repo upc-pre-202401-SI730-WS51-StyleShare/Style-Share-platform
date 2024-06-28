@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Style-Share-Platform", "Style-Share-Platform\Style-Share-Platform.csproj", "{D8883E4E-930A-4606-95D2-B8A64DE2D8C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D8883E4E-930A-4606-95D2-B8A64DE2D8C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8883E4E-930A-4606-95D2-B8A64DE2D8C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8883E4E-930A-4606-95D2-B8A64DE2D8C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8883E4E-930A-4606-95D2-B8A64DE2D8C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
